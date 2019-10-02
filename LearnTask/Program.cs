@@ -127,8 +127,20 @@ namespace LearnTask
 
             //Program-7
 
+            try
+            {
+                testException();
+            }
+            catch (AggregateException ex)
+            {
+                //Handle non handled/propagated exception
+                foreach (var e in ex.InnerExceptions)
+                {
+                    Console.WriteLine($"Exception {e.GetType()} from {e.Source}");
+                }
+            }
 
-
+            Console.ReadKey();
 
             Console.WriteLine("Main program done");
             Console.ReadKey();
@@ -170,6 +182,50 @@ namespace LearnTask
 
 
                 Console.WriteLine($"{count++} \t");
+            }
+        }
+
+        private static void testException()
+        {
+            try
+            {
+                var t1 = Task.Factory.StartNew(() =>
+                {
+                    throw new InvalidOperationException("Invalid operation exception") { Source = "t1" };
+                });
+
+                var t2 = Task.Factory.StartNew(() =>
+                {
+                    throw new AccessViolationException("Access violation exception") { Source = "t2" };
+                });
+
+                //wait to complete all task.
+                Task.WaitAll(new[] { t1, t2 });
+            }
+
+            //Handle exception using "AggregateException"
+            catch (AggregateException ex)
+            {
+                //Scenario-1::  Handling all exception
+
+                //foreach (var e in ex.InnerExceptions)
+                //{
+                //    Console.WriteLine($"Exception {e.GetType()} from {e.Source}");
+                //}
+
+                //Scenario-2:: Handle only particular type of exception
+
+                ex.Handle((e) =>
+                {
+                    if (e is InvalidOperationException)
+                    {
+                        Console.WriteLine("Handling Invalid operation exception...");
+                        return true;
+                    }
+
+                    //For access violation exception it propagated and handle from where it is called.
+                    return false;
+                });
             }
         }
 
