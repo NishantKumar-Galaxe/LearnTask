@@ -144,7 +144,18 @@ namespace LearnTask
 
 
             //Program-8
-            DataSharingAndSynchronization obj = new DataSharingAndSynchronization();
+            //DataSharingAndSynchronization obj = new DataSharingAndSynchronization();
+            //Console.WriteLine($"Balance is ::   {obj.GetBalance()}");
+
+
+            //Program-9
+
+            //SpinLocking obj = new SpinLocking();
+            //Console.WriteLine($"Balance is ::   {obj.GetBalance()}");
+
+
+            //Program-10
+            CheckMutex obj = new CheckMutex();
             Console.WriteLine($"Balance is ::   {obj.GetBalance()}");
 
 
