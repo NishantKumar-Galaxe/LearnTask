@@ -127,24 +127,32 @@ namespace LearnTask
 
             //Program-7
 
-            try
-            {
-                testException();
-            }
-            catch (AggregateException ex)
-            {
-                //Handle non handled/propagated exception
-                foreach (var e in ex.InnerExceptions)
-                {
-                    Console.WriteLine($"Exception {e.GetType()} from {e.Source}");
-                }
-            }
+            //try
+            //{
+            //    testException();
+            //}
+            //catch (AggregateException ex)
+            //{
+            //    //Handle non handled/propagated exception
+            //    foreach (var e in ex.InnerExceptions)
+            //    {
+            //        Console.WriteLine($"Exception {e.GetType()} from {e.Source}");
+            //    }
+            //}
 
-            Console.ReadKey();
+            //Console.ReadKey();
+
+
+            //Program-8
+            DataSharingAndSynchronization obj = new DataSharingAndSynchronization();
+            Console.WriteLine($"Balance is ::   {obj.GetBalance()}");
+
 
             Console.WriteLine("Main program done");
             Console.ReadKey();
         }
+
+
 
         public static void write(char c)
         {
